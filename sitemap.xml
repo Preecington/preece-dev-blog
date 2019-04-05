@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://preece.dev/2019/03/hello-world-or-yet-another-.net-dev-blog/</loc>
+    <lastmod>2019-03-30T06:39:02+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://preece.dev/archives/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://preece.dev/post/</loc>
+    <lastmod>2019-03-30T06:39:02+11:00</lastmod>
+    <priority>0</priority>
+  </url>
   
   <url>
     <loc>https://preece.dev/</loc>
@@ -8,8 +25,8 @@
   </url>
   
   <url>
-    <loc>https://preece.dev/2019/03/hello-world-or-yet-another-.net-dev-blog/</loc>
-    <lastmod>2019-03-30T06:39:02+11:00</lastmod>
+    <loc>https://preece.dev/tags/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>
