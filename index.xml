@@ -6,10 +6,20 @@
     <description>Recent content on Ryan Preece&#39;s Dev Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Mar 2019 06:39:02 +1100</lastBuildDate>
+    <lastBuildDate>Wed, 15 May 2019 17:16:31 +1000</lastBuildDate>
     
 	<atom:link href="https://preece.dev/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Microsoft Build 2019 - Thoughts</title>
+      <link>https://preece.dev/2019/05/microsoft-build-2019-thoughts/</link>
+      <pubDate>Wed, 15 May 2019 17:16:31 +1000</pubDate>
+      
+      <guid>https://preece.dev/2019/05/microsoft-build-2019-thoughts/</guid>
+      <description>Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone almost a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.
+What&amp;rsquo;s Hot My number one take away this year is that Artificial Intelligence and Machine Learning has really matured to a point where I should take it more seriously.</description>
+    </item>
     
     <item>
       <title>Hello, World (Or Yet Another .NET Dev Blog)</title>
