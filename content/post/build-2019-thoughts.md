@@ -6,9 +6,9 @@ tags:
 - Microsoft
 - .Net
 thumbnailImage: /img/20190506_222905861_iOS.jpg
-summary: "Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone almost a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading."
+summary: "Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading."
 ---
-Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone almost a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.
+Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.
 
 ![Build 2019 Session](/img/20190506_222905861_iOS.jpg)
 
