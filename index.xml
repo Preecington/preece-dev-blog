@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ryan Preece&#39;s Dev Blog</title>
@@ -17,8 +17,7 @@
       <pubDate>Wed, 15 May 2019 17:16:31 +1000</pubDate>
       
       <guid>https://preece.dev/2019/05/microsoft-build-2019-thoughts/</guid>
-      <description>Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.
-What&amp;rsquo;s Hot My number one take away this year is that Artificial Intelligence and Machine Learning has really matured to a point where I should take it more seriously.</description>
+      <description>Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.</description>
     </item>
     
     <item>
@@ -27,10 +26,7 @@ What&amp;rsquo;s Hot My number one take away this year is that Artificial Intell
       <pubDate>Sat, 30 Mar 2019 06:39:02 +1100</pubDate>
       
       <guid>https://preece.dev/2019/03/hello-world-or-yet-another-.net-dev-blog/</guid>
-      <description>👋 Hi, I&amp;rsquo;m Ryan.
-I&amp;rsquo;m a software engineer with 10+ years experience in muddling through developing applications and websites. Most of those years I&amp;rsquo;ve spent doing C# &amp;amp; .NET, which I&amp;rsquo;m pretty passionate about (still!).
-I&amp;rsquo;m most interested in Application Development (Desktop and Mobile) and DevOps, but in the last decade I&amp;rsquo;ve had the pleasure (or pain, depending&amp;hellip;) of working with:
- .NET / C# / VB.NET HoloLens (Oooh. 🌟) Windows Presentation Foundation (WPF) Universal Windows Platform (UWP) WinForms (Ahh!</description>
+      <description>My name is Ryan, and I&amp;rsquo;m doing the cool thing and starting a blog. Here&amp;rsquo;s who I am.</description>
     </item>
     
   </channel>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>.Net on Ryan Preece&#39;s Dev Blog</title>
+    <title>.NET on Ryan Preece&#39;s Dev Blog</title>
     <link>https://preece.dev/tags/.net/</link>
-    <description>Recent content in .Net on Ryan Preece&#39;s Dev Blog</description>
+    <description>Recent content in .NET on Ryan Preece&#39;s Dev Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 15 May 2019 17:16:31 +1000</lastBuildDate>
@@ -17,8 +17,7 @@
       <pubDate>Wed, 15 May 2019 17:16:31 +1000</pubDate>
       
       <guid>https://preece.dev/2019/05/microsoft-build-2019-thoughts/</guid>
-      <description>Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.
-What&amp;rsquo;s Hot My number one take away this year is that Artificial Intelligence and Machine Learning has really matured to a point where I should take it more seriously.</description>
+      <description>Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.</description>
     </item>
     
   </channel>
