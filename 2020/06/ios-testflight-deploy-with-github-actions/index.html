@@ -8,33 +8,37 @@
 <meta name="generator" content="Hugo 0.72.0 with theme Tranquilpeak 0.4.8-BETA">
 <meta name="author" content="Ryan Preece">
 <meta name="keywords" content="">
-<meta name="description" content="Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.">
+<meta name="description" content="A (not so quick) dive on getting an iOS app deployed to TestFlight using GitHub Actions">
 
 
-<meta property="og:description" content="Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.">
+<meta property="og:description" content="A (not so quick) dive on getting an iOS app deployed to TestFlight using GitHub Actions">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Microsoft Build 2019 - Thoughts">
-<meta name="twitter:title" content="Microsoft Build 2019 - Thoughts">
-<meta property="og:url" content="https://preece.dev/2019/05/microsoft-build-2019-thoughts/">
-<meta property="twitter:url" content="https://preece.dev/2019/05/microsoft-build-2019-thoughts/">
+<meta property="og:title" content="iOS TestFlight Deploy With GitHub Actions">
+<meta name="twitter:title" content="iOS TestFlight Deploy With GitHub Actions">
+<meta property="og:url" content="https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/">
+<meta property="twitter:url" content="https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/">
 <meta property="og:site_name" content="Ryan Preece&#39;s Dev Blog">
-<meta property="og:description" content="Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.">
-<meta name="twitter:description" content="Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.">
+<meta property="og:description" content="A (not so quick) dive on getting an iOS app deployed to TestFlight using GitHub Actions">
+<meta name="twitter:description" content="A (not so quick) dive on getting an iOS app deployed to TestFlight using GitHub Actions">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2019-05-15T17:16:31">
+    <meta property="article:published_time" content="2020-06-20T16:54:19">
   
   
-    <meta property="article:modified_time" content="2019-05-15T17:16:31">
+    <meta property="article:modified_time" content="2020-06-20T16:54:19">
   
   
   
   
     
-      <meta property="article:tag" content="Thoughts">
+      <meta property="article:tag" content="GitHub Actions">
     
-      <meta property="article:tag" content="Microsoft">
+      <meta property="article:tag" content="YAML">
+    
+      <meta property="article:tag" content="iOS">
+    
+      <meta property="article:tag" content="Xamarin">
     
       <meta property="article:tag" content=".NET">
     
@@ -53,8 +57,8 @@
 
 
 
-  <meta property="og:image" content="https://preece.dev/img/20190506_222905861_iOS.jpg">
-  <meta property="twitter:image" content="https://preece.dev/img/20190506_222905861_iOS.jpg">
+  <meta property="og:image" content="https://preece.dev/img/testflight_actions.png">
+  <meta property="twitter:image" content="https://preece.dev/img/testflight_actions.png">
 
 
 
@@ -64,14 +68,14 @@
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/75ccd198e9107822f3ee3235c2c03a71?s=640">
 
 
-    <title>Microsoft Build 2019 - Thoughts</title>
+    <title>iOS TestFlight Deploy With GitHub Actions</title>
 
     <link rel="icon" href="https://preece.dev/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://preece.dev/2019/05/microsoft-build-2019-thoughts/">
+    <link rel="canonical" href="https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -224,19 +228,19 @@ if (!doNotTrack) {
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Microsoft Build 2019 - Thoughts
+      iOS TestFlight Deploy With GitHub Actions
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-05-15T17:16:31&#43;10:00">
+      <time itemprop="datePublished" datetime="2020-06-20T16:54:19&#43;10:00">
         
   
   
   
   
-    15 May 2019
+    20 June 2020
   
 
       </time>
@@ -248,28 +252,116 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Last week I attended my fifth Build (in a row! 🤯). The conference and the company behind it has undergone a lot of change since 2015 when I first went, and I wanted to jot down my thoughts on the stuff I learned and the direction I think Microsoft is heading.</p>
-<p><img src="https://preece.dev/img/20190506_222905861_iOS.jpg" alt="Build 2019 Session"></p>
-<h2 id="whats-hot">What&rsquo;s Hot</h2>
-<p>My number one take away this year is that Artificial Intelligence and Machine Learning has really matured to a point where I should take it more seriously. My reaction last year to ML/AI was a firm &ldquo;meh&rdquo; as it seemed to be either &ldquo;call an API to see if you recognise my dog&rdquo; to full on data-scientist mathematical machinations. <a href="https://github.com/dotnet/machinelearning">Projects like ML.NET</a> have me thinking there is a middle ground for doing more engineering work in this space, which is exciting! I want to start thinking more about how I could use this sort of tech in a practical sense.</p>
-<p>There were also some goodies for the Desktop App developer inside of me, including the quiet release of <a href="https://github.com/Microsoft/msix-packaging#msix-sdk">MSIX</a> (sane installers for Windows 10 with auto updaters, but also works on Windows 7 and Android) with <a href="https://blogs.windows.com/buildingapps/2017/12/04/extend-desktop-application-windows-10-features-using-new-visual-studio-application-packaging-project/#lq9eAJjU12J6eOgR.97">Application Packaging Projects</a>, XAML Hot Reloading support for WPF/UWP/Xamarin Forms and a <a href="https://github.com/microsoft/react-native-windows/tree/master/vnext#reactnative-for-windows-vnext">complete rewrite of React Native for Windows to be in C++</a>.</p>
-<p>I also took a chance this week to play with compiling the <a href="https://github.com/Microsoft/Terminal">new Windows Terminal</a>. It&rsquo;s still absolutely early days but I&rsquo;m going to be keeping a close eye on this one - it looks like the team are going to nail a modern terminal experience on Windows. 🤞</p>
-<p>Other things I found cool that I&rsquo;ll be looking more into:</p>
+              <p><img src="https://preece.dev/img/testflight_actions.png" alt="TestFlight + Actions Header Image"></p>
+<div class="alert success no-icon ">
+  <p><strong>TL;DR</strong>: The <code>YAML</code> <a href="#show-me-the-yaml">is here</a> if you want to skip to the good part.</p>
+</div>
+<p>I&rsquo;ve just started a new iPhone project in my personal time, and I thought it&rsquo;d be nice to get a CD pipeline setup. The idea is to get each PR merge out to my <del>victims</del> friends who are kindly testing my buggy code via TestFlight. I thought this would be pretty straightforward (it has been with Azure Pipelines in the past!), but for added fun I thought I&rsquo;d do it with <a href="https://github.com/features/actions">GitHub Actions</a>. Easy, right?</p>
+<p>Turns out&hellip; not so much! 😅</p>
+<p>After a week and many hours cursing, I created a workflow that nailed it. 🎉 In the interest of giving back to the community, I&rsquo;ve documented the steps (and the <code>YAML</code> workflow I came up with) so you too can follow along and join in on the sweet DevOps goodness. The workflow makes a new build ready for release, increments the version number, uses the last PR merge commit message as the test release notes, and sends it off for distribution to a group we nominate.</p>
+<div class="alert info ">
+  <p>Whilst my solution is for Xamarin.iOS, this should cover 95% of what you need to for any release procedure that needs to build an <code>.ipa</code> package and release it via TestFlight.</p>
+</div>
+<h2 id="howd-i-do-this">How&rsquo;d I do this</h2>
+<p>You&rsquo;re going to need a few things:</p>
+<ol>
+<li>An Apple Developer Account with a paid Developer Program subscription</li>
+<li>An app registration setup in <a href="https://appstoreconnect.apple.com/">App Store Connect</a> with at least <strong>one</strong> build that has been released externally already (that is, to an external testing group that you have defined)</li>
+<li>Access to a macOS device to generate distribution certificates with private keys, if you don&rsquo;t have one already</li>
+<li>A GitHub repo - public or private, it&rsquo;ll still work!</li>
+</ol>
+<p>What you <em>won&rsquo;t</em> need is a non-2FA Apple ID like most iOS CI approaches require, so that&rsquo;s a nice bonus!</p>
+<h3 id="prerequisite-1---distribution-certificate--provisioning-profile">Prerequisite #1 - Distribution Certificate &amp; Provisioning Profile</h3>
+<p>You will need to generate a <code>.p12</code> Distribution Certificate and a App Store Distribution Provisioning Profile using the Developer Portal. There are plenty of guides on how to get a <code>p12</code> export going - I used <a href="https://support.magplus.com/hc/en-us/articles/203808748-iOS-Creating-a-Distribution-Certificate-and-p12-File">this guide</a> to do that. Note down the passphrase you use to export the certificate - you&rsquo;ll need it later.</p>
+<p>Once you have the certificate export, you&rsquo;ll need to export it as <code>base64</code> for later.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl base64 -in Certificates.p12 -out Certificates.txt
+</code></pre></div><p>If you haven&rsquo;t got an App Store Distribution Profile, make one now, and ensure your distribution certificate is included. You won&rsquo;t need to download it though.</p>
+<h3 id="prerequisite-2---app-store-connect-api-key">Prerequisite #2 - App Store Connect API Key</h3>
+<p>Next you will need to generate an App Store Connect API key with the App Manager access role, if you don&rsquo;t have one already. You can do that from the <a href="https://appstoreconnect.apple.com/access/api">Users and Access - Keys</a> section of App Store Connect.</p>
+<p>Once made, you should make a note of the Issuer ID, Key ID and download the private key using the <em>Download API Key</em> link. You&rsquo;ll need all three of these things later. If you run into trouble, <a href="https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api">the Apple docs on generating API keys</a> are a good place to start.</p>
+<h3 id="prerequisite-3---app-specific-password">Prerequisite #3 - App Specific Password</h3>
+<p>In order to not get 2FA prompts when our release is happening, we&rsquo;ll need an app-specific password to upload builds to App Store Connect. You can set one up via <a href="https://appleid.apple.com/account/manage">Apple Account Management</a> - and like the others, note it down for later.</p>
+<h3 id="prerequisite-4---app-apple-id">Prerequisite #4 - App &lsquo;Apple ID&rsquo;</h3>
+<p>Last but not least, you&rsquo;ll need your app&rsquo;s Apple ID. No, <em>not</em> your own Apple ID in email form - a numerical number that identifies your application inside App Store Connect. Navigate to the <a href="https://appstoreconnect.apple.com/apps/">Apps section</a> in App Store Connect and select App Information on the left - you&rsquo;ll find the Apple Id under the General Information pane. That&rsquo;s the last thing you need!</p>
+<h2 id="building-the-github-action-workflow">Building the GitHub Action Workflow</h2>
+<div class="alert warning ">
+  <p>As of time of writing, the App Connect API is a bit <em>flaky.</em> It has this habit of returning <code>403</code> 2-7 times in a row before actually letting you in, even though your credentials are fine. I had to hack around this - forgive the clunkiness!</p>
+</div>
+<p>Phew. Now that we&rsquo;ve collected all the required parts, you can start on the action itself. Firstly head to your repo&rsquo;s <em>Secrets</em> section in GitHub, and add the following secrets in:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>APPCONNECT_API_ISSUER</td>
+<td>Issuer ID from #2</td>
+</tr>
+<tr>
+<td>APPCONNECT_API_KEY_ID</td>
+<td>Key ID from #2</td>
+</tr>
+<tr>
+<td>APPCONNECT_API_KEY_PRIVATE</td>
+<td>Contents of the <code>.p8</code> file downloaded in #2</td>
+</tr>
+<tr>
+<td>APPLE_ID</td>
+<td>ID from #4</td>
+</tr>
+<tr>
+<td>DIST_CERT_BASE64</td>
+<td>Contents of the <code>.txt</code> file generated in #1</td>
+</tr>
+<tr>
+<td>DIST_CERT_P12_PASSWORD</td>
+<td>Passphrase from #1</td>
+</tr>
+<tr>
+<td>FASTLANE_APP_PASSWORD</td>
+<td>The app-specific password in #3</td>
+</tr>
+<tr>
+<td>FASTLANE_USERNAME</td>
+<td>The email associated with the Apple Account you&rsquo;ve been using</td>
+</tr>
+</tbody>
+</table>
+<p>To top it all off, create a workflow file in your repo that lives in <code>.github/workflows/testflight.yaml</code>. I called it <code>testflight</code> - you can call it whatever you like.</p>
+<p>The workflow in words is: <em>On <strong>push</strong> to <code>master</code>, perform the following on the latest macOS agent:</em></p>
+<ol>
+<li>Checkout code with full history</li>
+<li>Make a temporary keychain to hold the distribution certificate</li>
+<li>Build a bearer token for the Connect API</li>
+<li>&lsquo;Prime&rsquo; the API <a href="#building-the-github-action-workflow">(see note above)</a></li>
+<li>Import the right provisioning profile</li>
+<li>Bump our build versions to use the build number</li>
+<li>Do the actual build. <strong>NB: This is Xamarin.iOS for me - replace with your build tool of choice</strong></li>
+<li>Record the built <code>.ipa</code> as a build artefact in case we need it in the future</li>
+<li>Generate release notes from our PR merge history</li>
+<li>Push the build to TestFlight</li>
+<li>Instruct TestFlight to release the build to our chosen external group</li>
+</ol>
+<div class="alert info ">
+  <p>Step 11 assumes you have not set export compliance in your PList and you intend to nominate that you use non-exempt encryption. Read more <a href="https://developer.apple.com/documentation/security/complying_with_encryption_export_regulations">here</a> if you&rsquo;re unsure.</p>
+</div>
+<h2 id="show-me-the-yaml">Show me the YAML</h2>
+<p>Here it is, in all it&rsquo;s glory. You should change the following to your own values:</p>
 <ul>
-<li><a href="https://devblogs.microsoft.com/devops/whats-new-with-azure-pipelines/">Unified YAML CI/CD Pipelines in Azure DevOps</a></li>
-<li><a href="https://www.microsoft.com/en-us/microsoft-365/blog/2019/05/06/build-2019-people-centered-experiences-microsoft-365-productivity-cloud/">Fluid Framework</a></li>
-<li><a href="https://dotnet.microsoft.com/platform/try-dotnet">Try.NET</a></li>
-<li><a href="https://github.com/microsoft/PowerToys">PowerToys</a> - Yup, they&rsquo;re back!</li>
-<li>C# 8 <a href="https://devblogs.microsoft.com/dotnet/take-c-8-0-for-a-spin/">Nullable Reference Types, Async Streams (IAsyncEnumerables)</a> and <a href="https://devblogs.microsoft.com/dotnet/default-implementations-in-interfaces/">Default Implementations Interfaces</a></li>
-<li><a href="https://devblogs.microsoft.com/dotnet/introducing-net-5/">.NET 5</a></li>
-<li><a href="https://docs.microsoft.com/en-us/aspnet/core/grpc/?view=aspnetcore-3.0">gRPC in ASP.NET Core 3</a></li>
+<li><code>bundle-id</code></li>
+<li><code>GROUP_NAME</code></li>
 </ul>
-<p>So, nothing revolutionary this year, but certainly a lot to sink my teeth into.</p>
-<h2 id="direction">Direction</h2>
-<p>At Build 2015 I was firmly a Windows/.NET developer (and devotee) clutching my Windows Phone in hand and dreaming of a UWP future.</p>
-<p>Well. We all know how that turned out. 😅</p>
-<p>Microsoft is still invested in making Windows an awesome place to develop, and .NET to be the platform to do anything on. But the &ldquo;consumer Windows&rdquo; idea that was so prevalent in 2015 is long gone. UWP has been replaced by &ldquo;Windows Apps&rdquo; that bring Win32, WPF and WinForms back into the fold. I&rsquo;m no more sure about the mobile direction that Microsoft want to follow - I heard more about Blazor than Xamarin at Build, for instance. IoT Core still seems to be an afterthought.</p>
-<p>The Microsoft in 2019 instead wants you to use whatever language and tech you think is best, with Azure providing all the smarts. As for where that leaves a C# developer like me - that&rsquo;s something I&rsquo;ll have to ponder a bit more! 🤔</p>
+<div class="alert warning ">
+  <p>Here be dragons! 🐉🐉🐉 Be warned there&rsquo;s a wide array of language use going on.</p>
+</div>
+<script type="application/javascript" src="https://gist.github.com/Preecington/c1c2b30582a0ecf858da0a100ba621b4.js"></script>
+
+<p>And that&rsquo;s it! 🎉 Some of the above is pretty darn clunky, particularly the sprinkling of Python and Bash, but it works quite well. I&rsquo;d like GitHub Actions to support more tasks out of the box like Azure Pipelines does, and overall the experience of the Actions Marketplace left a bit to be desired - but that&rsquo;s for another post!</p>
+<p>If you&rsquo;d like more understanding of how the App Store Connect API works, I&rsquo;d recommend checking out the <a href="https://developer.apple.com/documentation/appstoreconnectapi">API docs</a> - it does more than just poking TestFlight! And lastly, any suggestions on how to improve the workflow would be more than welcome. ❤</p>
+<p>Happy automating! 🚀</p>
 
               
             </div>
@@ -282,9 +374,13 @@ if (!doNotTrack) {
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://preece.dev/tags/thoughts/">Thoughts</a>
+  <a class="tag tag--primary tag--small" href="https://preece.dev/tags/github-actions/">GitHub Actions</a>
 
-  <a class="tag tag--primary tag--small" href="https://preece.dev/tags/microsoft/">Microsoft</a>
+  <a class="tag tag--primary tag--small" href="https://preece.dev/tags/yaml/">YAML</a>
+
+  <a class="tag tag--primary tag--small" href="https://preece.dev/tags/ios/">iOS</a>
+
+  <a class="tag tag--primary tag--small" href="https://preece.dev/tags/xamarin/">Xamarin</a>
 
   <a class="tag tag--primary tag--small" href="https://preece.dev/tags/.net/">.NET</a>
 
@@ -299,7 +395,7 @@ if (!doNotTrack) {
             
               <li class="post-action">
                 
-                  <a class="post-action-btn btn btn--default tooltip--top" href="https://preece.dev/2019/03/hello-world-or-yet-another-.net-dev-blog/" data-tooltip="Hello, World (Or Yet Another .NET Dev Blog)">
+                  <a class="post-action-btn btn btn--default tooltip--top" href="https://preece.dev/2019/05/microsoft-build-2019-thoughts/" data-tooltip="Microsoft Build 2019 - Thoughts">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -307,7 +403,7 @@ if (!doNotTrack) {
               </li>
               <li class="post-action">
                 
-                  <a class="post-action-btn btn btn--default tooltip--top" href="https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/" data-tooltip="iOS TestFlight Deploy With GitHub Actions">
+                  <a class="post-action-btn btn btn--disabled">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -325,13 +421,13 @@ if (!doNotTrack) {
           </li>
           
             <li class="post-action hide-xs">
-              <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://preece.dev/2019/05/microsoft-build-2019-thoughts/">
+              <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/">
                 <i class="fa fa-facebook-official"></i>
               </a>
             </li>
           
             <li class="post-action hide-xs">
-              <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://preece.dev/2019/05/microsoft-build-2019-thoughts/">
+              <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/">
                 <i class="fa fa-twitter"></i>
               </a>
             </li>
@@ -384,7 +480,7 @@ if (!doNotTrack) {
             
               <li class="post-action">
                 
-                  <a class="post-action-btn btn btn--default tooltip--top" href="https://preece.dev/2019/03/hello-world-or-yet-another-.net-dev-blog/" data-tooltip="Hello, World (Or Yet Another .NET Dev Blog)">
+                  <a class="post-action-btn btn btn--default tooltip--top" href="https://preece.dev/2019/05/microsoft-build-2019-thoughts/" data-tooltip="Microsoft Build 2019 - Thoughts">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -392,7 +488,7 @@ if (!doNotTrack) {
               </li>
               <li class="post-action">
                 
-                  <a class="post-action-btn btn btn--default tooltip--top" href="https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/" data-tooltip="iOS TestFlight Deploy With GitHub Actions">
+                  <a class="post-action-btn btn btn--disabled">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -410,13 +506,13 @@ if (!doNotTrack) {
           </li>
           
             <li class="post-action hide-xs">
-              <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://preece.dev/2019/05/microsoft-build-2019-thoughts/">
+              <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/">
                 <i class="fa fa-facebook-official"></i>
               </a>
             </li>
           
             <li class="post-action hide-xs">
-              <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://preece.dev/2019/05/microsoft-build-2019-thoughts/">
+              <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://preece.dev/2020/06/ios-testflight-deploy-with-github-actions/">
                 <i class="fa fa-twitter"></i>
               </a>
             </li>
@@ -446,13 +542,13 @@ if (!doNotTrack) {
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreece.dev%2F2019%2F05%2Fmicrosoft-build-2019-thoughts%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreece.dev%2F2020%2F06%2Fios-testflight-deploy-with-github-actions%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fpreece.dev%2F2019%2F05%2Fmicrosoft-build-2019-thoughts%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fpreece.dev%2F2020%2F06%2Fios-testflight-deploy-with-github-actions%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>

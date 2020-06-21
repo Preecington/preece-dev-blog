@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Ryan Preece&#39;s Dev Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 May 2019 17:16:31 +1000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2020 16:54:19 +1000</lastBuildDate>
     
 	<atom:link href="https://preece.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,45 @@
     <item>
       <title>.NET</title>
       <link>https://preece.dev/tags/.net/</link>
-      <pubDate>Wed, 15 May 2019 17:16:31 +1000</pubDate>
+      <pubDate>Sat, 20 Jun 2020 16:54:19 +1000</pubDate>
       
       <guid>https://preece.dev/tags/.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GitHub Actions</title>
+      <link>https://preece.dev/tags/github-actions/</link>
+      <pubDate>Sat, 20 Jun 2020 16:54:19 +1000</pubDate>
+      
+      <guid>https://preece.dev/tags/github-actions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iOS</title>
+      <link>https://preece.dev/tags/ios/</link>
+      <pubDate>Sat, 20 Jun 2020 16:54:19 +1000</pubDate>
+      
+      <guid>https://preece.dev/tags/ios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xamarin</title>
+      <link>https://preece.dev/tags/xamarin/</link>
+      <pubDate>Sat, 20 Jun 2020 16:54:19 +1000</pubDate>
+      
+      <guid>https://preece.dev/tags/xamarin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>YAML</title>
+      <link>https://preece.dev/tags/yaml/</link>
+      <pubDate>Sat, 20 Jun 2020 16:54:19 +1000</pubDate>
+      
+      <guid>https://preece.dev/tags/yaml/</guid>
       <description></description>
     </item>
     
